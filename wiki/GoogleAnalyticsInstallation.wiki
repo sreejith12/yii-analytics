@@ -1,5 +1,5 @@
 #summary How-to install the Google Analytics extension in Yii
-#labels Phase-Deploy,Google-Analytics
+#labels Phase-Deploy,Google-Analytics,Featured
 #sidebar SidebarNav
 =Installing the Google Analytics Extension=
 
