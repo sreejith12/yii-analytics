@@ -1,4 +1,5 @@
 #summary Google Analytics extension overview
+#labels Google-Analytics
 =Google Analytics Extension Overview=
 The Google Analytics Yii extension provides developers and easy way to implement Google Analytics within their [http://yiiframework.com Yii-based] application. 
 
