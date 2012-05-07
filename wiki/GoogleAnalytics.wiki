@@ -1,6 +1,5 @@
 #summary Google Analytics extension overview
-#sidebar SidebarNav
-
 =Google Analytics Extension Overview=
-  * [GoogleAnalyticsInstallation How to install]
-  * [GoogleAnalyticsUsage How to use]
+The Google Analytics Yii extension provides developers and easy way to implement Google Analytics within their [http://yiiframework.com Yii-based] application. 
+
+The first step is to [GoogleAnalyticsInstallation install the extension]. Once this is completed you can learn [GoogleAnalyticsUsage how to use] it properly. 
