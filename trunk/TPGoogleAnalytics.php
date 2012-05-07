@@ -4,10 +4,12 @@
  * Google Analytics Component
  *
  * @author Philip Lawrence <philip@misterphilip.com>
- * @link http://www.misterphilip.com
+ * @link http://misterphilip.com
+ * @link http://tagpla.net
  * @link http://code.google.com/p/yii-analytics/
  * @copyright Copyright &copy; 2012 Philip Lawrence
  * @license http://www.apache.org/licenses/LICENSE-2.0
+ * @version 1.0.0
  */
 class TPGoogleAnalytics extends CApplicationComponent
 {
@@ -40,10 +42,10 @@ class TPGoogleAnalytics extends CApplicationComponent
      */
     const Q = "'";
 
-
     /**
      * Available options, pulled (May 4, 2012) from
      * https://developers.google.com/analytics/devguides/collection/gajs/methods/
+     * @var array
      */
     protected $_availableOptions = array
     (
@@ -95,10 +97,22 @@ class TPGoogleAnalytics extends CApplicationComponent
         '_trackTrans',
     );
 
+    /**
+     * An array of all the methods called for _gaq
+     * @var array
+     */
     protected $_calledOptions = array();
+
+    /**
+     * Method data to be pushed into the _gaq object
+     * @var array
+     */
 
     private $_data = array();
 
+    /**
+     * init function - Yii automaticall calls this
+     */
     public function init()
     {
         $this->_accountID = $this->parseAccountID($this->account);
@@ -108,6 +122,11 @@ class TPGoogleAnalytics extends CApplicationComponent
         }
     }
 
+    /**
+     * Cleans up and verifies the Google Analytics account ID
+     * @param string $accountID
+     * @return string
+     */
     public function parseAccountID($accountID)
     {
         if($this->_accountID == null)
@@ -128,7 +147,7 @@ class TPGoogleAnalytics extends CApplicationComponent
 
     /**
      * Render and return the Google Analytics code
-     * @return type
+     * @return mixed
      */
     public function render()
     {
@@ -207,4 +226,3 @@ EOJS;
         $this->_calledOptions[] = $variable;
     }
 }
-?>
