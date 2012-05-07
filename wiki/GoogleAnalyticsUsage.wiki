@@ -1,4 +1,5 @@
 #summary How to use the Google Analytics extension
+#labels Google-Analytics,Featured
 
 = Using the Google Analytics Extension =
 
