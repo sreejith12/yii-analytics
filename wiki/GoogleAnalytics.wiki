@@ -1,0 +1,6 @@
+#summary Google Analytics extension overview
+#sidebar SidebarNav
+
+=Google Analytics Extension Overview=
+  * [GoogleAnalyticsInstallation How to install]
+  * [GoogleAnalyticsUsage How to use]
