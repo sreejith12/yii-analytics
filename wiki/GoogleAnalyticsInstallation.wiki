@@ -1,14 +1,12 @@
 #summary How-to install the Google Analytics extension in Yii
 #labels Phase-Deploy
+#sidebar SidebarNav
 =Installing the Google Analytics Extension=
 
 This wiki is about how to install the Google Analytics extension in Yii. To see how to use it, [GoogleAnalyticsUsage please see this wiki]
 
 Table of Contents:
-  # [GoogleAnalyticsInstallation#Step_1:_Upload_the_files Step 1: Unzip the googleAnalytics.zip into your extensions directory]
-  # [GoogleAnalyticsInstallation#Step_2:_Add_in_configuration Step 2: Add in the component to the configuration files]
-  # [GoogleAnalyticsInstallation#Step_3:_(Optional)_Add_in_auto-render Step 3: Optionally add in auto-render code]
-  # [GoogleAnalyticsInstallation#Configuration_Options Configuration Options]
+<wiki:toc max_depth="2" />
 
 ==Step 1: Upload the files==
 The first step is straightforward; simply unzip the files from the latest [http://code.google.com/p/yii-analytics/downloads/list?q=label:Google%20Anlaytics Google Analytics downloads] into your extensions folder. You should now be able to navigate to `protected/extensions/TPGoogleAnalytics/components/` and see a file called `TPGoogleAnalytics.php`
