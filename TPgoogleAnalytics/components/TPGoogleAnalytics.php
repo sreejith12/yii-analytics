@@ -9,7 +9,7 @@
  * @link http://code.google.com/p/yii-analytics/
  * @copyright Copyright &copy; 2012 Philip Lawrence
  * @license http://www.apache.org/licenses/LICENSE-2.0
- * @version 1.0.0
+ * @version 1.0.1
  */
 class TPGoogleAnalytics extends CApplicationComponent
 {
@@ -36,6 +36,12 @@ class TPGoogleAnalytics extends CApplicationComponent
      * @var bool
      */
     public $autoPageview = true;
+
+    /**
+     * Should we render a URL string for mobile, or a JS block?
+     * @var bool
+     */
+    public $renderMobile = false;
 
     /**
      * Type of quotes to use for values
@@ -172,15 +178,17 @@ class TPGoogleAnalytics extends CApplicationComponent
             $js = 'var _gaq = _gaq || [];' . PHP_EOL;
             foreach($this->_data as $data)
             {
-                // Loop through each argument we will pass into the gaq object push
+                // Clean up each item
                 foreach($data as $key => $item)
                 {
-                    /*
-                    * @TODO: Figure out whats up with this
-                    $data[$key] = preg_replace('~(?<!\\)\'~', '\\\'', $item);
-                     */
-                    // @TODO: Clean this up
-                    $data[$key] = is_string($item) ? self::Q . $item . self::Q : (is_bool($item) ? ($item ? 'true' : 'false') : $item);
+                    if(is_string($item))
+                    {
+                        $data[$key] = self::Q . preg_replace('~(?<!\\\)'. self::Q . '~', '\\'. self::Q, $item) . self::Q;
+                    }
+                    else if(is_bool($item))
+                    {
+                        $data[$key] = ($item) ? 'true' : 'false';
+                    }
                 }
 
                 $js.= '_gaq.push([' . implode(',', $data) . ']);' . PHP_EOL;
@@ -193,6 +201,7 @@ class TPGoogleAnalytics extends CApplicationComponent
 })();
 // Google Analytics Extension provided by TagPla.net
 EOJS;
+            // Should we auto add in the analytics tag?
             if($this->autoRender)
             {
                 Yii::app()->clientScript
