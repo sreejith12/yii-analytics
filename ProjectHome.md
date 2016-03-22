@@ -1,0 +1,1 @@
+This is now on [GitHub](https://github.com/TagPlanet/yii-analytics)

@@ -1,0 +1,64 @@
+# Installing the Google Analytics Extension #
+
+This wiki is about how to install the Google Analytics extension in Yii. To see how to use it, [please see this wiki](GoogleAnalyticsUsage.md)
+
+Table of Contents:
+
+
+## Step 1: Upload the files ##
+The first step is straightforward; simply unzip the files from the latest [downloads](http://code.google.com/p/yii-analytics/downloads/list?can=2&q=label%3AGoogle-Analytics&colspec=Filename+Summary+Uploaded+ReleaseDate+Size+DownloadCount) into your extensions folder. You should now be able to navigate to `protected/extensions/TPGoogleAnalytics/components/` and see a file called `TPGoogleAnalytics.php`
+
+## Step 2: Add in configuration ##
+Within your configuration files (usually found under `/protected/config/`) there is the "components" section. Just like your db and cache components, we'll need to add in our own configuration for this. Add in the following code within the components section:
+```
+'googleAnalytics' => array(
+    'class' =>'ext.TPGoogleAnalytics.components.TPGoogleAnalytics',
+    'account' => 'UA-########-#',
+),
+```
+
+## Step 3: (Optional) Add in auto-render ##
+In order for the Google Analytics component to automatically render the code in the header, you must have the following two items configured:
+  1. **Configuration file** – within the googleAnalytics configuration, you must include:
+```
+'googleAnalytics' => array(
+    'class' =>'ext.TPGoogleAnalytics.components.TPGoogleAnalytics',
+    'account' => 'UA-########-#',
+    'autoRender' => true,
+),
+```
+  1. **Controllers** - your controllers must have the following code:
+```
+protected function beforeRender($view)
+{
+    $return = parent::beforeRender($view);
+    Yii::app()->googleAnalytics->render();
+    return $return;
+}
+```
+Unless you are already extending another Controller, you can almost always place this within `protected/components/Controller.php` OR within every single one of your controllers. In the event that you already have the method `beforeRender` within your controllers, simple add in the following line to it, before the return statement:
+```
+Yii::app()->googleAnalytics->render();
+```
+
+## Configuration Options ##
+This component allows for some flexibility within the configuration section. Below are all of the allowed configuration variables:
+  * **class** - The TPGoogleAnalytics class location
+    * Required: yes
+    * Type: string
+    * Default: `ext.TPGoogleAnalytics.components.TPGoogleAnalytics`
+  * **account** - Your Google Analytics account ID
+    * Required: yes
+    * Type: string
+    * Format:  `UA-########-#`
+    * Default: (none)
+  * **autoRender** - Automatically render the Google Analytics code in the head. If you do set this to true, you will need to update your controller's `beforeRender` method (see:[Optionally adding in auto-render code](GoogleAnalyticsInstallation#Step_3:_(Optional)_Add_in_auto-render.md))
+    * Required: no
+    * Type: boolean
+    * Recommend Setting: true
+    * Default: false
+  * **autoPageview** - Automatically add `_trackPageview` to the code. By disabling this, you will need to call `Yii::app()->googleAnalytics->_trackPageview();` for each view you want to track. Even when this is enabled, you can still call `_trackPageview` with a specified page name and it will not call `_trackPageview` twice.
+    * Required: no
+    * Type: boolean
+    * Recommend Setting: true
+    * Default: true
